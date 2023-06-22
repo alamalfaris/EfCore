@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataTransferObjects.Student
+namespace DataTransferObjects.Product
 {
-    public class CreateUpdateStudentDto : BaseDto
+    public class CreateUpdateProductDto : BaseDto
     {
         public string Name { get; set; } = string.Empty;
-        public int Grade { get; set; }
+        public string? Information { get; set; }
+
     }
 }

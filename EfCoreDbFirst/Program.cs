@@ -1,3 +1,7 @@
+using EfCoreDbFirst.Database;
+using EfCoreDbFirst.Repositories.Product;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,7 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContextPool<DatabaseContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
+#region Dependency Injection
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+#endregion
 
 var app = builder.Build();
 
